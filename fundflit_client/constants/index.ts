@@ -1,10 +1,10 @@
 // NAVIGATION
 export const NAV_LINKS = [
   { href: "/", key: "home", label: "Home" },
-  { href: "/", key: "how_fundflit_work", label: "How Fundflit Work?" },
-  { href: "/", key: "about", label: "About" },
-  { href: "/", key: "campaign", label: "Campaign" },
-  { href: "/", key: "contact_us", label: "Contact Us" },
+  { href: "/fundflit", key: "how_fundflit_work", label: "How Fundflit Work?" },
+  { href: "/about", key: "about", label: "About" },
+  { href: "/campaign", key: "campaign", label: "Campaign" },
+  { href: "/contact", key: "contact_us", label: "Contact Us" },
 ];
 
 // FEATURES SECTION
@@ -47,7 +47,7 @@ export const FOOTER_LINKS = [
   },
   {
     title: "Our Community",
-    links: ["Discord", "Hiking hilink", "Hilink kinthill"],
+    links: ["Discord", "Hacking Club", "Pragmatic Builders"],
   },
 ];
 
@@ -63,3 +63,45 @@ export const SOCIALS = {
   title: "Social Links",
   links: ["/instagram.svg", "/twitter.svg", "/youtube.svg"],
 };
+
+export const appImages = [
+  {
+    id: 1,
+    image: "assets/image-1.jpeg",
+    text: "Help Build a School",
+  },
+  {
+    id: 2,
+    image: "assets/image-2.jpeg",
+    text: "Help Build a Healthcare center",
+  },
+  {
+    id: 3,
+    image: "assets/image-3.jpeg",
+    text: "Help Arumbe Village",
+  },
+];
+
+export const faqItems = [
+  {
+    id: 1,
+    question: "What is your name?",
+    answer:
+      "My name is John Doe. My name is John Doe.My name is John Doe.My name is John Doe.My name is John Doe",
+  },
+  {
+    id: 2,
+    question: "Where are you from?",
+    answer: "I am from New York",
+  },
+  {
+    id: 3,
+    question: "What is your favorite color?",
+    answer: "My favorite color is blue",
+  },
+  {
+    id: 4,
+    question: "How do you spend your weekends?",
+    answer: "I enjoy hiking and reading",
+  },
+];
