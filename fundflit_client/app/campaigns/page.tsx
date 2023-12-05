@@ -17,6 +17,7 @@ const Campaigns = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onSubmit" });
+  const [submittedDID, setSubmittedDID] = useState("");
 
   const fetchData = async (did: string) => {
     if (did && web5) {
@@ -29,7 +30,7 @@ const Campaigns = () => {
       }
     } else if (web5 && !did) {
       try {
-        const campaignArray = await readCampaigns(myDID, web5);
+        const {campaignArray, recordID} = await readCampaigns(myDID, web5);
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
@@ -39,8 +40,11 @@ const Campaigns = () => {
   };
 
   const onSubmit = (data: any) => {
+    setSubmittedDID(data.did);
     fetchData(data);
   };
+
+  useEffect(()=>{console.log(campaigns)},[campaigns])
 
   return (
     <>
@@ -50,9 +54,12 @@ const Campaigns = () => {
             <article className="w-full flex items-baseline text-4xl font-bold text-left">
               <h1>Explore Campaigns</h1>
             </article>
-            <Link href={"/campaigns/create"} className="btn bg-green-50 hover:bg-black-100 whitespace-nowrap">
+            <Link
+              href={"/campaigns/create"}
+              className="btn bg-green-50 hover:bg-black-100 whitespace-nowrap"
+            >
               Create a campaign
-            </Link >
+            </Link>
           </section>
 
           <form className="form" id="search" onSubmit={handleSubmit(onSubmit)}>
@@ -81,11 +88,12 @@ const Campaigns = () => {
           </form>
         </div>
       </header>
+
       <section className="h-full mt-4">
         {campaigns === null ? (
           <section className="text-3xl font-medium p-60 text-center">
-          Place a DID to start searching
-        </section>
+            Place a DID to start searching
+          </section>
         ) : campaigns.length === 0 ? (
           <section className="text-3xl font-medium p-60 text-center">
             This DID doesn't have any related campaigns
@@ -93,8 +101,8 @@ const Campaigns = () => {
         ) : (
           <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
             {campaigns.map((campaign) => (
-              <div key={campaign.name}>
-                {<CampaignCard campaign={campaign} />}
+              <div key={campaign.id}>
+                {<CampaignCard campaign={campaign.data} did={submittedDID || myDID} record={campaign.recordID} />}
               </div>
             ))}
           </section>
