@@ -52,6 +52,7 @@ export const createCampaign = async (
     });
 
     const data = await record.data.json();
+    console.log(data);
     // const camp = { record, id: record.id };
 
     //Sync the local dwm with the server dwm instantly instead of waiting for web5 to do it automatically
@@ -75,12 +76,13 @@ export const readCampaigns = async (did: string, web5: any) => {
     },
   });
 
-  const campaignPromises = records.map(
-    async (record) => await record.data.json()
-  );
+  const campaignPromises = records.map(async (record) => {
+    const data = await record.data.json();
+    return { data, recordID: record.id };
+  });
 
   const campaignArray = await Promise.all(campaignPromises);
-
+console.log(campaingArray)
   return campaignArray;
 };
 
@@ -89,17 +91,21 @@ export const readCampaignDetail = async (
   web5: any,
   recordId: string
 ) => {
-  const { record } = await web5.dwn.records.query({
+  const { records } = await web5.dwn.records.query({
     from: did,
     message: {
       filter: {
-        recordId: recordId,
+        protocol: protocolDefinition.protocol,
+        protocolPath: "campaign",
       },
     },
+   
   });
 
-  const campaign = await record.data;
-  console.log(campaign)
+  console.log(records);
 
-  return campaign;
+  // const campaign = await record.data;
+  // console.log(campaign);
+
+  // return campaign;
 };

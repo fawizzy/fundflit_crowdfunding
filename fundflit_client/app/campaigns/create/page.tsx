@@ -4,6 +4,7 @@ import Alert from "@/components/Alert";
 import { useWeb5 } from "@/plugins/web5.client";
 import Campaign from "@/types/campaigns.type";
 import { createCampaign } from "@/utils/web5.utils";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -53,9 +54,9 @@ const CampaignCreate = () => {
               <h1>Create your own campaign</h1>
             </article>
           </section>
-          <button className="bg-green-50 hover:bg-black-100 btn self-start">
+          <Link href={"/campaigns"} className="bg-green-50 hover:bg-black-100 btn self-start">
             {"< Go back to campaigns"}
-          </button>
+          </Link>
         </div>
       </header>
       <section className="h-full mt-4 mx-10">
