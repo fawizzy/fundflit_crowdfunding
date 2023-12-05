@@ -2,6 +2,7 @@ import { NAV_LINKS } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "./Button";
+import LogIn from "./LogIn";
 
 const Navbar = () => {
   return (
@@ -27,12 +28,7 @@ const Navbar = () => {
         ))}
       </ul>
       <div className="lg:flexCenter hidden">
-        <Button
-          type="button"
-          title="Login"
-          icon="/assets/user.svg"
-          variant="btn_dark_green"
-        />
+        <LogIn />
       </div>
 
       <Image

@@ -3,7 +3,7 @@ export const NAV_LINKS = [
   { href: "/", key: "home", label: "Home" },
   { href: "/", key: "how_fundflit_work", label: "How Fundflit Work?" },
   { href: "/", key: "about", label: "About" },
-  { href: "/", key: "campaign", label: "Campaign" },
+  { href: "/campaigns", key: "campaigns", label: "Campaigns" },
   { href: "/", key: "contact_us", label: "Contact Us" },
 ];
 

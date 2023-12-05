@@ -116,3 +116,27 @@
   -ms-overflow-style: none; /*IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* Forms */
+
+.form {
+  @apply text-slate-500 flex flex-col gap-5;
+}
+
+.form label {
+  @apply text-xs font-medium;
+}
+
+.form input,
+select,
+textarea {
+  @apply border-[1px] border-slate-400 font-normal rounded-lg w-full px-2 py-3;
+}
+
+.form button {
+  @apply btn;
+}
+
+.btn {
+  @apply flex justify-center items-center text-white  py-3 px-4 font-semibold text-base rounded-md transition-all;
+}
