@@ -68,14 +68,22 @@ export const createCampaign = async (
 };
 
 export const readCampaigns = async (did: string, web5: any) => {
+  console.log("readCAmpaigns", did)
   const { records } = await web5.dwn.records.query({
+    from: did,
     message: {
-      filter: {
-        protocol: protocolDefinition.protocol,
-      },
+      // filter: {
+      //   protocol: protocolDefinition.protocol,
+      // },
     },
   });
 
+  console.log(records)
+
+  const campaignPromises = records.map(async (record) => {
+    const data = await record.data.json();
+    return { data, recordID: record.id };
+  });
   const campaignPromises = records.map(async (record) => {
     const data = await record.data.json();
     return { data, recordID: record.id };
@@ -83,6 +91,7 @@ export const readCampaigns = async (did: string, web5: any) => {
 
   const campaignArray = await Promise.all(campaignPromises);
 console.log(campaingArray)
+
   return campaignArray;
 };
 
