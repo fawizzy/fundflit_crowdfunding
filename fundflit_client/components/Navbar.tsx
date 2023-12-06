@@ -34,12 +34,6 @@ const Navbar = () => {
       </ul>
 
       <div className="lg:flexCenter hidden">
-        <Button
-          type="button"
-          title="My Credentials"
-          icon="/assets/user.svg"
-          variant="btn_dark_green"
-        />
         <LogIn />
       </div>
       {/* Mobile Navigation */}
@@ -70,12 +64,7 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="lg:hidden flex justify-start items-start pt-10">
-          <Button
-            type="button"
-            title="My Credentials"
-            icon="/assets/user.svg"
-            variant="btn_dark_green"
-          />
+          <LogIn />
         </div>
       </div>
     </nav>
