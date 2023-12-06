@@ -1,5 +1,3 @@
-# Hardhat Boilerplate
-
 ## Quick start
 
 The first things you need to do are cloning this repository and installing its
