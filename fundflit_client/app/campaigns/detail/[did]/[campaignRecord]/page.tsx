@@ -26,7 +26,7 @@ const CampaignDetails = () => {
         const chosenCamp = camp.filter(
           (campaign) => campaign.recordID === campaignRecord
         );
-
+        // console.log(chosenCamp)
         setCampaign(chosenCamp[0].data);
       }
     };

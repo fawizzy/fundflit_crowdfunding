@@ -1,14 +1,11 @@
 import protocolDefinition from "@/public/assets/protocol/campaign.protocol.json";
 import Campaign from "@/types/campaigns.type";
-<<<<<<< Updated upstream
-=======
 import { uuid } from "short-uuid";
 
 interface CampaignRecordType {
   data: Campaign;
   recordID: string;
 }
->>>>>>> Stashed changes
 
 export const configureProtocol = async (web5: any) => {
   // query the list of existing protocols on the DWN
@@ -46,19 +43,11 @@ export const configureProtocol = async (web5: any) => {
 export const createCampaign = async (
   campaign: Campaign,
   web5: any,
-<<<<<<< Updated upstream
-  did: string
-) => {
-  try {
-    const { record } = await web5.dwn.records.create({
-      data: { "@type": "campaign", ...campaign },
-=======
   did: string | null
 ) => {
   try {
     const { record } = await web5.dwn.records.create({
       data: { "@type": "campaign", ...campaign, id: uuid() },
->>>>>>> Stashed changes
       message: {
         protocol: protocolDefinition.protocol,
         protocolPath: "campaign",
@@ -68,18 +57,6 @@ export const createCampaign = async (
       },
     });
 
-<<<<<<< Updated upstream
-    const data = await record.data.json();
-    console.log(data);
-    // const camp = { record, id: record.id };
-
-    //Sync the local dwm with the server dwm instantly instead of waiting for web5 to do it automatically
-    // const { status: sendStatus } = await camp.record.send(did);
-
-    console.log(record);
-
-    return record.id;
-=======
     // console.log("data utils", await record.data.json())
 
     const id = await record.id;
@@ -91,41 +68,12 @@ export const createCampaign = async (
     // const { status: sendStatus } = await record.send(did);
 
     return id;
->>>>>>> Stashed changes
   } catch (e) {
     console.error("error: ", e);
     return;
   }
 };
 
-<<<<<<< Updated upstream
-export const readCampaigns = async (did: string, web5: any) => {
-  console.log("readCAmpaigns", did)
-  const { records } = await web5.dwn.records.query({
-    from: did,
-    message: {
-      // filter: {
-      //   protocol: protocolDefinition.protocol,
-      // },
-    },
-  });
-
-  console.log(records)
-
-  const campaignPromises = records.map(async (record) => {
-    const data = await record.data.json();
-    return { data, recordID: record.id };
-  });
-  const campaignPromises = records.map(async (record) => {
-    const data = await record.data.json();
-    return { data, recordID: record.id };
-  });
-
-  const campaignArray = await Promise.all(campaignPromises);
-console.log(campaingArray)
-
-  return campaignArray;
-=======
 export const readCampaigns = async (did: any, web5: any) => {
   // console.log("readCampaigns", did);
 
@@ -168,32 +116,27 @@ export const readCampaigns = async (did: any, web5: any) => {
   // console.log(campaignArray);
 
   return campaignArray as { data: Campaign; recordID: string }[];
->>>>>>> Stashed changes
 };
 
-export const readCampaignDetail = async (
-  did: string,
-  web5: any,
-  recordId: string
-) => {
-  const { records } = await web5.dwn.records.query({
-    from: did,
-    message: {
-      filter: {
-        protocol: protocolDefinition.protocol,
-        protocolPath: "campaign",
-      },
-    },
-<<<<<<< Updated upstream
-   
-=======
->>>>>>> Stashed changes
-  });
+// export const readCampaignDetail = async (
+//   did: string,
+//   web5: any,
+//   recordId: string
+// ) => {
+//   const { records } = await web5.dwn.records.query({
+//     from: did,
+//     message: {
+//       filter: {
+//         protocol: protocolDefinition.protocol,
+//         protocolPath: "campaign",
+//       },
+//     },
+//   });
 
-  console.log(records);
+//   console.log(records);
 
-  // const campaign = await record.data;
-  // console.log(campaign);
+//   // const campaign = await record.data;
+//   // console.log(campaign);
 
-  // return campaign;
-};
+//   // return campaign;
+// };

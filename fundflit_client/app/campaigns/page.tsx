@@ -8,11 +8,8 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Alert from "@/components/Alert";
 import Link from "next/link";
-<<<<<<< Updated upstream
-=======
 import { configureProtocol } from "@/utils/web5.utils";
 import Campaign from "@/types/campaigns.type";
->>>>>>> Stashed changes
 
 const Campaigns = () => {
   const { web5, myDID } = useWeb5();
@@ -24,30 +21,18 @@ const Campaigns = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onSubmit" });
-<<<<<<< Updated upstream
-  const [submittedDID, setSubmittedDID] = useState("");
-=======
-  const [submittedDID, setSubmittedDID] = useState(myDID);
+  const [submittedDID, setSubmittedDID] = useState<any>(myDID);
 
   useEffect(() => {
     if (web5) configureProtocol(web5);
   }, [web5]);
->>>>>>> Stashed changes
 
   const fetchData = async (did: string) => {
-    const useDID = did?.search || null
+    const useDID = did?.search || myDID;
     if (did && web5) {
-<<<<<<< Updated upstream
-      console.log(useDID)
-      try {
-
-        
-        const campaignArray = await readCampaigns(did, web5);
-=======
       // console.log(useDID);
       try {
         const campaignArray = await readCampaigns(useDID, web5);
->>>>>>> Stashed changes
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
@@ -55,25 +40,24 @@ const Campaigns = () => {
       }
     } else if (web5 && !did) {
       try {
-<<<<<<< Updated upstream
-        const {campaignArray, recordID} = await readCampaigns(myDID, web5);
-=======
         const campaignArray = await readCampaigns(myDID, web5);
->>>>>>> Stashed changes
         setCampaigns(campaignArray);
+        setSubmittedDID(useDID);
+        console.log(myDID);
+        console.log(submittedDID);
       } catch (error) {
         // Handle errors if any
         console.error(error);
       }
-    // } else if (web5 && !did) {
-    //   try {
-    //     const {campaignArray, recordID} = await readCampaigns(myDID, web5);
-    //     setCampaigns(campaignArray);
-    //   } catch (error) {
-    //     // Handle errors if any
-    //     console.error(error);
-    //   }
-    // }
+      // } else if (web5 && !did) {
+      //   try {
+      //     const {campaignArray, recordID} = await readCampaigns(myDID, web5);
+      //     setCampaigns(campaignArray);
+      //   } catch (error) {
+      //     // Handle errors if any
+      //     console.error(error);
+      //   }
+      // }
     }
   };
 
@@ -84,13 +68,9 @@ const Campaigns = () => {
     fetchData(data);
   };
 
-<<<<<<< Updated upstream
-  useEffect(()=>{console.log(campaigns)},[campaigns])
-=======
   // useEffect(() => {
   //   console.log(campaigns);
   // }, [campaigns]);
->>>>>>> Stashed changes
 
   return (
     <>
@@ -150,12 +130,6 @@ const Campaigns = () => {
         ) : (
           <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
             {campaigns.map((campaign) => (
-<<<<<<< Updated upstream
-              <div key={campaign.id}>
-
-                {<CampaignCard campaign={campaign.data} did={submittedDID} record={campaign.recordID} />}
-                {<CampaignCard campaign={campaign.data} did={submittedDID || myDID} record={campaign.recordID} />}
-=======
               <div key={campaign.data.id}>
                 {
                   <CampaignCard
@@ -164,7 +138,6 @@ const Campaigns = () => {
                     record={campaign.recordID}
                   />
                 }
->>>>>>> Stashed changes
               </div>
             ))}
           </section>
