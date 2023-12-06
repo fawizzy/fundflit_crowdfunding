@@ -8,6 +8,7 @@ import Spinner from "@/components/Spinner";
 import { useForm } from "react-hook-form";
 import Alert from "@/components/Alert";
 import Link from "next/link";
+import { configureProtocol } from "@/utils/web5.utils";
 
 const Campaigns = () => {
   const { web5, myDID } = useWeb5();
@@ -19,13 +20,17 @@ const Campaigns = () => {
   } = useForm({ mode: "onSubmit" });
   const [submittedDID, setSubmittedDID] = useState("");
 
-  const fetchData = async (did: string) => {
-    const useDID = did?.search || null
-    if (did && web5) {
-      console.log(useDID)
-      try {
+  const { web5 } = useWeb5();
 
-        
+  useEffect(() => {
+    if (web5) configureProtocol(web5);
+  }, [web5]);
+
+  const fetchData = async (did: string) => {
+    const useDID = did?.search || null;
+    if (did && web5) {
+      console.log(useDID);
+      try {
         const campaignArray = await readCampaigns(did, web5);
         setCampaigns(campaignArray);
       } catch (error) {
@@ -34,21 +39,21 @@ const Campaigns = () => {
       }
     } else if (web5 && !did) {
       try {
-        const {campaignArray, recordID} = await readCampaigns(myDID, web5);
+        const { campaignArray, recordID } = await readCampaigns(myDID, web5);
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
         console.error(error);
       }
-    // } else if (web5 && !did) {
-    //   try {
-    //     const {campaignArray, recordID} = await readCampaigns(myDID, web5);
-    //     setCampaigns(campaignArray);
-    //   } catch (error) {
-    //     // Handle errors if any
-    //     console.error(error);
-    //   }
-    // }
+      // } else if (web5 && !did) {
+      //   try {
+      //     const {campaignArray, recordID} = await readCampaigns(myDID, web5);
+      //     setCampaigns(campaignArray);
+      //   } catch (error) {
+      //     // Handle errors if any
+      //     console.error(error);
+      //   }
+      // }
     }
   };
 
@@ -57,7 +62,9 @@ const Campaigns = () => {
     fetchData(data);
   };
 
-  useEffect(()=>{console.log(campaigns)},[campaigns])
+  useEffect(() => {
+    console.log(campaigns);
+  }, [campaigns]);
 
   return (
     <>
@@ -115,9 +122,20 @@ const Campaigns = () => {
           <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
             {campaigns.map((campaign) => (
               <div key={campaign.id}>
-
-                {<CampaignCard campaign={campaign.data} did={submittedDID} record={campaign.recordID} />}
-                {<CampaignCard campaign={campaign.data} did={submittedDID || myDID} record={campaign.recordID} />}
+                {
+                  <CampaignCard
+                    campaign={campaign.data}
+                    did={submittedDID}
+                    record={campaign.recordID}
+                  />
+                }
+                {
+                  <CampaignCard
+                    campaign={campaign.data}
+                    did={submittedDID || myDID}
+                    record={campaign.recordID}
+                  />
+                }
               </div>
             ))}
           </section>
