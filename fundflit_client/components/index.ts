@@ -1,3 +1,5 @@
 import Hero from "./Hero";
+import Features from "./Features";
+import FeaturesCards from "./FeaturesCards";
 
-export { Hero };
+export { Hero, Features, FeaturesCards };

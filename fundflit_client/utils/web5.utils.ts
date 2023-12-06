@@ -84,9 +84,14 @@ export const readCampaigns = async (did: string, web5: any) => {
     const data = await record.data.json();
     return { data, recordID: record.id };
   });
+  const campaignPromises = records.map(async (record) => {
+    const data = await record.data.json();
+    return { data, recordID: record.id };
+  });
 
   const campaignArray = await Promise.all(campaignPromises);
-console.log(campaignArray)
+console.log(campaingArray)
+
   return campaignArray;
 };
 

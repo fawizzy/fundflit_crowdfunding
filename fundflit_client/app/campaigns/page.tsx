@@ -24,7 +24,17 @@ const Campaigns = () => {
     if (did && web5) {
       console.log(useDID)
       try {
-        const campaignArray = await readCampaigns(useDID, web5);
+
+        
+        const campaignArray = await readCampaigns(did, web5);
+        setCampaigns(campaignArray);
+      } catch (error) {
+        // Handle errors if any
+        console.error(error);
+      }
+    } else if (web5 && !did) {
+      try {
+        const {campaignArray, recordID} = await readCampaigns(myDID, web5);
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
@@ -105,7 +115,9 @@ const Campaigns = () => {
           <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
             {campaigns.map((campaign) => (
               <div key={campaign.id}>
+
                 {<CampaignCard campaign={campaign.data} did={submittedDID} record={campaign.recordID} />}
+                {<CampaignCard campaign={campaign.data} did={submittedDID || myDID} record={campaign.recordID} />}
               </div>
             ))}
           </section>
