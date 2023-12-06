@@ -19,16 +19,16 @@ const FAQs = () => {
   };
 
   return (
-    <main className="sm:mt-[0] mt-[5rem]">
-      <h3 className="text-gray-90 text-xl font-bold mb-8">
-        Frequently Asked Questions
+    <main className="sm:mt-[0] mt-[5rem] pb-[1rem] mb-[3rem] ">
+      <h3 className="text-gray-90 text-[20px] font-bold mb-5 text-center lg:text-left">
+        Frequently Asked Questions (FAQs)
       </h3>
 
       <div className="h-[24rem]">
         {faqItems.map((item) => (
           <div key={item.id}>
             <div
-              className="bg-white flex items-center justify-between px-3 py-6 mb-[1px] rounded-md w-full cursor-pointer font-semibold"
+              className="bg-white flex items-center justify-between px-3 py-6 mb-[2px] rounded-md w-full cursor-pointer font-semibold"
               onClick={() => toggleAnswer(item.id)}
             >
               <span className="text-[1rem]">{item.question}</span>
@@ -41,7 +41,7 @@ const FAQs = () => {
             </div>
 
             <div
-              className="bg-transparent px-6 py-[3px] text-[1rem] w-full pointer-events-none flex items-center "
+              className="bg-transparent px-6 py-[3px] text-[.85rem] w-full pointer-events-none flex items-center "
               style={{
                 opacity: visibleAnswer === item.id ? 1 : 0,
                 height: visibleAnswer === item.id ? "5rem" : "0",

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200,300,400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -8,7 +8,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #fafbfc;
 }
 /* START: General styles */
 
@@ -17,13 +21,13 @@
     @apply border-white bg-white px-8 py-3 text-green-50;
   }
   .btn_white_text {
-    @apply border-white bg-white px-8 py-3 text-gray-90;
+    @apply border-white bg-white px-8 py-2 text-gray-90 shadow-xl hover:shadow-green-100;
   }
   .btn_green {
-    @apply border-green-50 bg-green-50 px-8 py-5 text-white;
+    @apply border-green-50 bg-green-50 px-8 py-3 text-white hover:bg-black-100;
   }
   .btn_dark_green {
-    @apply bg-green-90 px-8 py-2 text-white transition-all hover:bg-green-50;
+    @apply bg-green-90 px-8 py-3 text-white transition-all hover:bg-green-200 hover:shadow-gray-30;
   }
   .btn_dark_green_outline {
     @apply border-gray-20 bg-green-90 px-8 py-5 text-white;
@@ -62,49 +66,17 @@
 /* END: General styles */
 
 /* START: Hero styles */
-.hero {
-  @apply flex xl:flex-row flex-col gap-5 relative z-0 max-w-[1440px] mx-auto;
+
+.bold-40 {
+  @apply text-[40px] font-[700] leading-[120%];
 }
 
-.hero__title {
-  @apply 2xl:text-[72px] sm:text-[64px] text-[50px] font-extrabold;
+.bold-52 {
+  @apply text-[45px] font-[700] leading-[120%];
 }
-
-.hero__subtitle {
-  @apply text-[27px] text-black-100 font-light mt-5;
-}
-
-.hero__image-container {
-  @apply xl:flex-[1.5] flex justify-end items-end w-full xl:h-screen;
-}
-
 .hero__image {
   @apply relative xl:w-full w-[90%] xl:h-full h-[590px] z-0;
 }
-
-.hero__image-overlay {
-  @apply absolute xl:-top-24 xl:-right-1/2 -right-1/4 bg-hero-bg bg-repeat-round -z-10 w-full xl:h-screen h-[590px] overflow-hidden;
-}
-/* END: Hero styles */
-
-/* START: Home styles */
-
-.home__text-container {
-  @apply flex flex-col items-start justify-start gap-y-2.5 text-black-100;
-}
-
-.home__filter-container {
-  @apply flex justify-start flex-wrap items-center gap-2;
-}
-
-.home__cars-wrapper {
-  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14;
-}
-
-.home__error-container {
-  @apply mt-16 flex justify-center items-center flex-col gap-2;
-}
-/* END: Home styles */
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
