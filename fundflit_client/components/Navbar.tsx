@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "./Button";
+import LogIn from "./LogIn";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -39,6 +40,7 @@ const Navbar = () => {
           icon="/assets/user.svg"
           variant="btn_dark_green"
         />
+        <LogIn />
       </div>
       {/* Mobile Navigation */}
       <div className="sm:hidden flex flex-1 justify-end items-center">

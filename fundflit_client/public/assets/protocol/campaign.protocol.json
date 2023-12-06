@@ -1,0 +1,24 @@
+{
+  "protocol": "/assets/protocol/campaign.protocol.json",
+  "published": true,
+  "types": {
+    "campaign": {
+      "schema": "/assets/schema/campaign.schema.json",
+      "dataFormats": ["application/json"]
+    }
+  },
+  "structure": {
+    "campaign": {
+      "$actions": [
+        {
+          "who": "anyone",
+          "can": "read"
+        },
+        {
+          "who": "anyone",
+          "can": "write"
+        }
+      ]
+    }
+  }
+}

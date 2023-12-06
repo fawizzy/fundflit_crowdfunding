@@ -1,6 +1,7 @@
 import "./global.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Web5Provider } from "@/plugins/web5.client";
 
 interface RootLayoutProps {
   children: React.ReactNode;
@@ -13,12 +14,14 @@ export const metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        <main className="relative overflow-hidden">{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <Web5Provider>
+      <html lang="en">
+        <body >
+          <Navbar />
+          <main className="grid grid-rows-[auto_1fr_auto] min-h-screen">{children}</main>
+          <Footer />
+        </body>
+      </html>
+    </Web5Provider>
   );
 }
