@@ -4,21 +4,28 @@ import { useWeb5 } from "@/plugins/web5.client";
 import { readCampaigns } from "@/utils/web5.utils";
 import { CampaignCard } from "@/components/CampaignCard";
 import { useEffect, useState } from "react";
-import Spinner from "@/components/Spinner";
+// import Spinner from "@/components/Spinner";
 import { useForm } from "react-hook-form";
 import Alert from "@/components/Alert";
 import Link from "next/link";
 import { configureProtocol } from "@/utils/web5.utils";
+import Campaign from "@/types/campaigns.type";
 
 const Campaigns = () => {
   const { web5, myDID } = useWeb5();
-  const [campaigns, setCampaigns] = useState(null);
+  const [campaigns, setCampaigns] = useState<
+    { data: Campaign; recordID: string }[]
+  >([]);
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onSubmit" });
-  const [submittedDID, setSubmittedDID] = useState("");
+  const [submittedDID, setSubmittedDID] = useState<any>(myDID);
+
+  useEffect(() => {
+    if (web5) configureProtocol(web5);
+  }, [web5]);
 
   const { web5 } = useWeb5();
 
@@ -27,11 +34,13 @@ const Campaigns = () => {
   }, [web5]);
 
   const fetchData = async (did: string) => {
-    const useDID = did?.search || null;
+
+    const useDID = did?.search || myDID;
     if (did && web5) {
-      console.log(useDID);
+      // console.log(useDID);
       try {
-        const campaignArray = await readCampaigns(did, web5);
+        const campaignArray = await readCampaigns(useDID, web5);
+        
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
@@ -39,8 +48,11 @@ const Campaigns = () => {
       }
     } else if (web5 && !did) {
       try {
-        const { campaignArray, recordID } = await readCampaigns(myDID, web5);
+        const campaignArray = await readCampaigns(myDID, web5);
         setCampaigns(campaignArray);
+        setSubmittedDID(useDID);
+        console.log(myDID);
+        console.log(submittedDID);
       } catch (error) {
         // Handle errors if any
         console.error(error);
@@ -59,12 +71,15 @@ const Campaigns = () => {
 
   const onSubmit = (data: any) => {
     setSubmittedDID(data.did);
+
+    console.log(submittedDID);
     fetchData(data);
   };
 
-  useEffect(() => {
-    console.log(campaigns);
-  }, [campaigns]);
+  // useEffect(() => {
+  //   console.log(campaigns);
+  // }, [campaigns]);
+
 
   return (
     <>
@@ -103,7 +118,10 @@ const Campaigns = () => {
             </div>
 
             {!isValid && (
-              <Alert severity="error" message={errors?.search?.message} />
+              <Alert
+                severity="error"
+                message={String(errors?.search?.message)}
+              />
             )}
           </form>
         </div>
@@ -121,14 +139,7 @@ const Campaigns = () => {
         ) : (
           <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
             {campaigns.map((campaign) => (
-              <div key={campaign.id}>
-                {
-                  <CampaignCard
-                    campaign={campaign.data}
-                    did={submittedDID}
-                    record={campaign.recordID}
-                  />
-                }
+              <div key={campaign.data.id}>
                 {
                   <CampaignCard
                     campaign={campaign.data}

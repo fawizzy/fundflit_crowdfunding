@@ -5,24 +5,28 @@ import { useEffect, useState } from "react";
 import { useWeb5 } from "@/plugins/web5.client";
 import Spinner from "@/components/Spinner";
 import GoalBar from "@/components/GoalBar";
+import Campaign from "@/types/campaigns.type";
 
 const CampaignDetails = () => {
   const { web5, myDID } = useWeb5();
-  const { did: decodedDid, campaignRecord } = useParams();
-  const [campaign, setCampaign] = useState();
+  const { did, campaignRecord } = useParams();
+  const [campaign, setCampaign] = useState<Campaign>();
 
-  const did = decodeURIComponent(decodedDid);
-  const [progress, setProgress] = useState();
+  //Ensure did is string
+  const stringDid = Array.isArray(did) ? did[0] : did;
 
-  //Since getting the specific campaign from web5 providing a record doesn't seem to work right now
-  //I porvisionally fetch all campaigns and then filter the one with the record specified in the url
+  const decodedDid = decodeURIComponent(stringDid);
+  const [progress, setProgress] = useState(0);
+
   useEffect(() => {
     const fetchCampaigns = async () => {
       if (web5) {
-        const camp = await readCampaigns(did, web5);
+        const camp = await readCampaigns(decodedDid, web5);
+
         const chosenCamp = camp.filter(
           (campaign) => campaign.recordID === campaignRecord
         );
+        // console.log(chosenCamp)
         setCampaign(chosenCamp[0].data);
       }
     };
@@ -39,29 +43,45 @@ const CampaignDetails = () => {
 
   return (
     <>
-      {web5 && campaign ? (
-        <>
+      {campaign !== null ? (
+        <div className="mx-10 gap-4 flex flex-col overflow-hidden h-screen mt-10">
           {/* Title */}
-          <header>
+          <header className="w-full">
             <article>
-              <h1>{campaign.campaign_name}</h1>
+              <h1 className="text-2xl font-semibold">
+                {campaign?.campaign_name}
+              </h1>
             </article>
           </header>
 
           {/* Body */}
-          <section>
+          <section className="flex flex-col gap-2 w-full">
             <div
-              className="h-[50%] w-auto bg-cover bg-center rounded-t-md"
-              style={{ backgroundImage: `url(${campaign.imageUrl})` }}
+              className="h-[500px] w-auto bg-cover bg-center rounded-t-md"
+              style={{ backgroundImage: `url(${campaign?.imageUrl})` }}
             />
-            <h2>{campaign.name} is organizing this fundraiser</h2>
-            <p>{campaign.story}</p>
+            <div className="flex gap-1">
+              <h2 className="font-semibold">{campaign?.name} </h2>
+              <p className="text-gray-500">is organizing this fundraiser</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h2 className="text-xl font-semibold">Story</h2>
+              <p>{campaign?.story}</p>
+            </div>
+
             <GoalBar progress={progress} />
-            <div className="flex gap-1"><h2>{campaign.current_funds} ETH</h2><p>raised of {campaign.goal} ETH goal</p></div>
+            <div className="flex gap-1">
+              <h2>{campaign?.current_funds} ETH</h2>
+              <p className="text-gray-500">
+                raised of {campaign?.goal} ETH goal
+              </p>
+            </div>
           </section>
-        </>
+        </div>
       ) : (
-        <Spinner />
+        <div className="h-screen">
+          <Spinner />
+        </div>
       )}
     </>
   );

@@ -2,7 +2,7 @@
 export const NAV_LINKS = [
   { href: "/fundflit", key: "how_fundflit_work", label: "How Fundflit Work?" },
   { href: "/about", key: "about", label: "About" },
-  { href: "/campaign", key: "campaign", label: "Campaign" },
+  { href: "/campaigns", key: "campaigns", label: "Campaigns" },
   { href: "/contact", key: "contact_us", label: "Contact Us" },
 ];
 
