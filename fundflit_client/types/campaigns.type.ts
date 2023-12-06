@@ -6,7 +6,7 @@ type Campaign = {
   goal: number;
   current_funds: number;
   end_date: string;
-  campaign_image: string;
+  imageUrl: string;
 };
 
 export default Campaign;

@@ -1,9 +1,9 @@
 {
-  "protocol": "/assets/protocol/campaign.protocol.json",
+  "protocol": "https://francoaguirre.com.ar/protocol/campaign.protocol.json",
   "published": true,
   "types": {
     "campaign": {
-      "schema": "/assets/schema/campaign.schema.json",
+      "schema": "https://francoaguirre.com.ar/schema/campaign.schema.json",
       "dataFormats": ["application/json"]
     }
   },

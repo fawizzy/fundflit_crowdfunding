@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-// import { v4 as uuidv4 } from "uuid";
 
 const CampaignCreate = () => {
   const { web5, myDID } = useWeb5();
@@ -27,17 +26,12 @@ const CampaignCreate = () => {
     return inputDate > currentDate;
   };
 
-  // const onSubmit = (data: any) => {
-  //   const newData = { ...data, id: uuidv4(), current_funds: 0 };
-  //   const recordID = createCampaign(newData, web5, myDID);
-  //   router.push(`/campaigns/detail/${myDID}/${recordID}`);
-  // };
-
   const onSubmit = async (data: any) => {
     const newData = { ...data, id: data.campaign_name, current_funds: 0 };
     try {
       const recordID = await createCampaign(newData, web5, myDID);
-      router.push(`/campaigns/detail/${myDID}/${recordID}`);
+      // console.log(recordID)
+      router.push(`/campaigns/detail/${myDID}/${await recordID}`);
     } catch (error) {
       // Handle error if createCampaign fails
       console.error("Error creating campaign:", error);
@@ -194,7 +188,7 @@ const CampaignCreate = () => {
         </div>
 
         {Object.keys(errors).length > 0 && (
-          <Alert severity="error" message={Object.values(errors)[0]?.message} />
+          <Alert severity="error" message={String(Object.values(errors)[0]?.message)} />
         )}
       </section>
     </>

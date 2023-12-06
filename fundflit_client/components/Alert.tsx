@@ -3,6 +3,7 @@ import errorIcon from "@/public/assets/error.svg";
 import warningIcon from "@/public/assets/warning.svg";
 import successIcon from "@/public/assets/success.svg";
 import Image from "next/image";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 
 interface AlertProps {
   severity: "error" | "warning" | "success";
