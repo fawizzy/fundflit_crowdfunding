@@ -27,12 +27,20 @@ const Campaigns = () => {
     if (web5) configureProtocol(web5);
   }, [web5]);
 
+  const { web5 } = useWeb5();
+
+  useEffect(() => {
+    if (web5) configureProtocol(web5);
+  }, [web5]);
+
   const fetchData = async (did: string) => {
+
     const useDID = did?.search || myDID;
     if (did && web5) {
       // console.log(useDID);
       try {
         const campaignArray = await readCampaigns(useDID, web5);
+        
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
@@ -71,6 +79,7 @@ const Campaigns = () => {
   // useEffect(() => {
   //   console.log(campaigns);
   // }, [campaigns]);
+
 
   return (
     <>
