@@ -27,12 +27,6 @@ const Campaigns = () => {
     if (web5) configureProtocol(web5, myDID);
   }, [web5]);
 
-  const { web5 } = useWeb5();
-
-  useEffect(() => {
-    if (web5) configureProtocol(web5);
-  }, [web5]);
-
   const fetchData = async (did: string) => {
 
     const useDID = did?.search || myDID;
@@ -66,7 +60,7 @@ const Campaigns = () => {
     console.log(submittedDID);
     fetchData(data);
   };
-  
+
   return (
     <>
       <header className="px-10 py-5 bg-[#FBF8F6]">
