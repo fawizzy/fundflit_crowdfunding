@@ -1,4 +1,3 @@
-import protocolDefinition from "@/public/assets/protocol/campaign.protocol.json";
 import Campaign from "@/types/campaigns.type";
 import { uuid } from "short-uuid";
 
@@ -7,38 +6,52 @@ interface CampaignRecordType {
   recordID: string;
 }
 
-export const configureProtocol = async (web5: any) => {
-  // query the list of existing protocols on the DWN
-  const { protocols, status } = await web5.dwn.protocols.query({
+export const protocolDefinition = {
+  protocol: "http://test3",
+  published: true,
+  types: {
+    campaign: {
+      dataFormats: ["application/json"],
+    },
+  },
+  structure: {
+    campaign: {
+      $actions: [
+        {
+          who: "anyone",
+          can: "read",
+        },
+        {
+          who: "anyone",
+          can: "write",
+        },
+      ],
+    },
+  },
+};
+
+export const configureProtocol = async (web5: any, did: string | null) => {
+  const { protocol, status } = await web5.dwn.protocols.configure({
+    message: {
+      definition: protocolDefinition,
+    },
+  });
+  const response = await protocol.send(did);
+  // console.log(response)
+
+  console.log(status);
+};
+
+export async function queryProtocol(web5: any) {
+  const { protocols } = await web5.dwn.protocols.query({
     message: {
       filter: {
-        protocol: protocolDefinition.protocol,
+        protocol: "test3",
       },
     },
   });
-
-  if (status.code !== 200) {
-    alert("Error querying protocols");
-    console.error("Error querying protocols", status);
-    return;
-  }
-
-  // if the protocol already exists, we return
-  if (protocols.length > 0) {
-    console.log("Protocol already exists");
-    return;
-  }
-
-  // configure protocol on local DWN
-  const { status: configureStatus, protocol } =
-    await web5.dwn.protocols.configure({
-      message: {
-        definition: protocolDefinition,
-      },
-    });
-
-  console.log("Protocol configured", configureStatus, protocol);
-};
+  console.log(protocols);
+}
 
 export const createCampaign = async (
   campaign: Campaign,
@@ -46,28 +59,24 @@ export const createCampaign = async (
   did: string | null
 ) => {
   try {
-    const { record } = await web5.dwn.records.create({
-      data: { "@type": "campaign", ...campaign, id: uuid() },
+    const { record: initialrecord } = await web5.dwn.records.create({
+      data: { ...campaign, id: uuid() },
       message: {
-        protocol: protocolDefinition.protocol,
+        schema: "blogpost",
+        dataFormat: "application/json",
+        protocol: "http://test3",
         protocolPath: "campaign",
-        schema: protocolDefinition.types.campaign.schema,
-        dataFormat: protocolDefinition.types.campaign.dataFormats[0],
-        recipient: did,
+        published: true,
       },
     });
 
-    // console.log("data utils", await record.data.json())
+    const { status: initialstatus } = await initialrecord.send(did);
+    console.log(initialstatus);
 
-    const id = await record.id;
-    // console.log("record utils", await record)
-    // console.log(data);
-    // const camp = { record, id: record.id };
+    const conId = initialrecord.id;
+    console.log(conId);
 
-    //Sync the local dwm with the server dwm instantly instead of waiting for web5 to do it automatically
-    // const { status: sendStatus } = await record.send(did);
-
-    return id;
+    return conId;
   } catch (e) {
     console.error("error: ", e);
     return;
@@ -75,22 +84,16 @@ export const createCampaign = async (
 };
 
 export const readCampaigns = async (did: any, web5: any) => {
-  // console.log("readCampaigns", did);
-
-  // Check protocol filter
-  if (!protocolDefinition.protocol) {
-    throw new Error("Missing protocol definition");
-  }
-
   const { records, status } = await web5.dwn.records.query({
-    from: "",
+    from: did,
     message: {
       filter: {
-        protocol: protocolDefinition.protocol,
-        // Add additional filters here if needed
+        protocol: "http://test3",
+        protocolPath: "campaign",
       },
     },
   });
+  console.log("camapign records", records);
 
   // Handle error
   if (status.code !== 200) {
@@ -113,30 +116,36 @@ export const readCampaigns = async (did: any, web5: any) => {
   });
 
   const campaignArray = await Promise.all(campaignPromises);
-  // console.log(campaignArray);
 
   return campaignArray as { data: Campaign; recordID: string }[];
 };
 
-// export const readCampaignDetail = async (
-//   did: string,
-//   web5: any,
-//   recordId: string
-// ) => {
-//   const { records } = await web5.dwn.records.query({
-//     from: did,
-//     message: {
-//       filter: {
-//         protocol: protocolDefinition.protocol,
-//         protocolPath: "campaign",
-//       },
-//     },
-//   });
+export const readCampaignDetail = async (
+  did: string,
+  web5: any,
+  recordId: string
+) => {
+  try {
+    const { records, status } = await web5.dwn.records.query({
+      from: "",
+      message: {
+        filter: {
+          recordId: recordId,
+        },
+      },
+    });
 
-//   console.log(records);
+    const campaignPromises = records.map(async (record: any) => {
+      const data = await record.data.json();
+      return data as {
+        data: Campaign;
+      };
+    });
 
-//   // const campaign = await record.data;
-//   // console.log(campaign);
+    const campaignArray = await Promise.all(campaignPromises);
 
-//   // return campaign;
-// };
+    return campaignArray[0];
+  } catch (e) {
+    console.log("error fetching campaign detail: ", e);
+  }
+};
