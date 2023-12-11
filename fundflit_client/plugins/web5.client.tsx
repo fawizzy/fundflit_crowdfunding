@@ -7,9 +7,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Web5 } from "@web5/api";
+import { Web5 } from "@web5/api/browser";
 
-import protocolDefinition from "@/public/assets/protocol/campaign.protocol.json"
 
 interface Web5ContextProps {
   web5: any;
@@ -35,10 +34,6 @@ export const Web5Provider = ({ children }: { children: ReactNode }) => {
         const { web5: connectedWeb5, did: connectedDID } = await Web5.connect({
           sync: "5s",
         });
-
-        // console.log("Plugin loaded");
-        // console.log("Here's your DID", connectedDID);
-
         setWeb5(connectedWeb5);
         setMyDID(connectedDID);
       } catch (error) {
