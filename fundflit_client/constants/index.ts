@@ -201,17 +201,10 @@ export const values = [
 export const missions = [
   {
     highlight: "commited.",
-    intro: "We are ",
     detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
   },
   {
     highlight: "responsible.",
-    intro: "We are ",
     detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. "
-  },
-  {
-    highlight: "progress.",
-    intro: "We aim for",
-    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. "
   },
 ]

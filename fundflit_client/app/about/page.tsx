@@ -1,11 +1,11 @@
-import About_Hero from "@/components/About_Hero";
-import Contact from "@/components/Contact";
-import Our_Mission from "@/components/Our_Mission";
-import Our_Numbers from "@/components/Our_Numbers";
-import Our_Story from "@/components/Our_Story";
-import Our_Team from "@/components/Our_Team";
-import Our_Values from "@/components/Our_Values";
-import Vision from "@/components/Vision";
+import About_Hero from "@/app/about/About_Hero";
+import Contact from "@/app/about/Contact";
+import Our_Mission from "@/app/about/Our_Mission";
+import Our_Numbers from "@/app/about/Our_Numbers";
+import Our_Story from "@/app/about/Our_Story";
+import Our_Team from "@/app/about/Our_Team";
+import Our_Values from "@/app/about/Our_Values";
+import Vision from "@/app/about/Vision";
 
 const About = () => {
   return (

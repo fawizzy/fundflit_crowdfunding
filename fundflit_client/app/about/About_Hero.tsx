@@ -9,7 +9,7 @@ const About_Hero = () => {
                 <h2 className=" lg:text-[4rem] md:text-[3rem] sm:text-[2.6rem] text-[1.7rem] text-gray-100">
                     We love to make great things, things that matter.
                 </h2>
-                <p className=" md:text-base sm:text-sm text-[10px] text-gray-200 mt-5 sm:w-[80%] w-[90%] md:leading-8 leading-5">
+                <p className=" md:text-base sm:text-sm text-[12px] text-gray-200 mt-5 sm:w-[80%] w-[90%] md:leading-8 leading-5">
                     Funding handshake buyer business-to-business metrics iPad partnership. First mover advantage innovator success deployment non-disclosure.
                 </p>
             </div>

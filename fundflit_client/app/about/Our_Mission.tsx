@@ -10,7 +10,7 @@ const Our_Mission = () => {
             {missions.map((mission) => (
                 <div key={mission.highlight} className=" w-full flex justify-center md:gap-8 gap-5 md:mb-0 mb-4">
                 <div className="w-[45%]">
-                   <p className="md:text-[2.5rem] sm:text-[2rem] text-[1.5rem]">{mission.intro} <span className=" text-coral-green">{mission.highlight}</span></p>
+                   <p className="md:text-[2.5rem] sm:text-[2rem] text-[1.5rem]">We are <span className=" text-coral-green">{mission.highlight}</span></p>
                 </div>
                 <div className="w-[55%]">
                     <p className=" md:text-base text:sm md:leading-8 leading-6">{mission.detail}</p>
