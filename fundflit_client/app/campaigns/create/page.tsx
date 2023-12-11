@@ -27,15 +27,13 @@ const CampaignCreate = () => {
   };
 
   const onSubmit = async (data: any) => {
-    const newData = { ...data, id: data.campaign_name, current_funds: 0 };
+    const newData = { ...data, current_funds: 0 };
     try {
       const recordID = await createCampaign(newData, web5, myDID);
-      // console.log(recordID)
       router.push(`/campaigns/detail/${myDID}/${await recordID}`);
     } catch (error) {
       // Handle error if createCampaign fails
       console.error("Error creating campaign:", error);
-      // You might want to add error handling or feedback to the user here
     }
   };
 

@@ -1,5 +1,5 @@
 "use client";
-import { readCampaigns } from "@/utils/web5.utils";
+import { readCampaignDetail } from "@/utils/web5.utils";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useWeb5 } from "@/plugins/web5.client";
@@ -8,7 +8,7 @@ import GoalBar from "@/components/GoalBar";
 import Campaign from "@/types/campaigns.type";
 
 const CampaignDetails = () => {
-  const { web5, myDID } = useWeb5();
+  const { web5 } = useWeb5();
   const { did, campaignRecord } = useParams();
   const [campaign, setCampaign] = useState<Campaign>();
 
@@ -21,13 +21,8 @@ const CampaignDetails = () => {
   useEffect(() => {
     const fetchCampaigns = async () => {
       if (web5) {
-        const camp = await readCampaigns(decodedDid, web5);
-
-        const chosenCamp = camp.filter(
-          (campaign) => campaign.recordID === campaignRecord
-        );
-        // console.log(chosenCamp)
-        setCampaign(chosenCamp[0].data);
+        const camp = await readCampaignDetail(decodedDid, web5, campaignRecord);
+        setCampaign(camp);
       }
     };
 

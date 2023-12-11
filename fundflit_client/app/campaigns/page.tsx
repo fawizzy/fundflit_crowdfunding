@@ -24,13 +24,7 @@ const Campaigns = () => {
   const [submittedDID, setSubmittedDID] = useState<any>(myDID);
 
   useEffect(() => {
-    if (web5) configureProtocol(web5);
-  }, [web5]);
-
-  const { web5 } = useWeb5();
-
-  useEffect(() => {
-    if (web5) configureProtocol(web5);
+    if (web5) configureProtocol(web5, myDID);
   }, [web5]);
 
   const fetchData = async (did: string) => {
@@ -57,15 +51,6 @@ const Campaigns = () => {
         // Handle errors if any
         console.error(error);
       }
-      // } else if (web5 && !did) {
-      //   try {
-      //     const {campaignArray, recordID} = await readCampaigns(myDID, web5);
-      //     setCampaigns(campaignArray);
-      //   } catch (error) {
-      //     // Handle errors if any
-      //     console.error(error);
-      //   }
-      // }
     }
   };
 
@@ -75,11 +60,6 @@ const Campaigns = () => {
     console.log(submittedDID);
     fetchData(data);
   };
-
-  // useEffect(() => {
-  //   console.log(campaigns);
-  // }, [campaigns]);
-
 
   return (
     <>
