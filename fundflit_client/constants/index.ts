@@ -133,3 +133,85 @@ export const features = [
     subtext: "Our dedicated team is here to assist you every step of the way.",
   },
 ];
+
+// About page Our number section
+export const numbers = [
+  {
+    value: 120 + "m",
+    title: "Cool feature title"
+  },
+  {
+    value: 10 + ".000",
+    title: "Cool feature title"
+  },
+  {
+    value: 240,
+    title: "Cool feature title"
+  },
+]
+
+// About page teams section
+export const members = [
+  {
+    id: 1,
+    imgUrl: "/assets/about-img1.jpeg",
+    name: "Michael Scott",
+    position: "General Manager"
+  },
+  {
+    id: 2,
+    imgUrl: "/assets/about-img2.jpeg",
+    name: "Michael Scott",
+    position: "General Manager"
+  },
+  {
+    id: 3,
+    imgUrl: "/assets/about-img3.png",
+    name: "Michael Scott",
+    position: "General Manager"
+  },
+  {
+    id: 4,
+    imgUrl: "/assets/about-img4.png",
+    name: "Michael Scott",
+    position: "General Manager"
+  },
+]
+
+// About page our values section
+export const values = [
+  {
+    imgUrl: "/assets/about-img4.png",
+    value: "We are commited.",
+    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+  },
+  {
+    imgUrl: "/assets/about-img2.jpeg",
+    value: "We are responsible.",
+    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+  },
+  {
+    imgUrl: "/assets/about-img3.png",
+    value: "We aim for progress.",
+    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+  },
+]
+
+// About page our misson section
+export const missions = [
+  {
+    highlight: "commited.",
+    intro: "We are ",
+    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+  },
+  {
+    highlight: "responsible.",
+    intro: "We are ",
+    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. "
+  },
+  {
+    highlight: "progress.",
+    intro: "We aim for",
+    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. "
+  },
+]
