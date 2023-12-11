@@ -1,4 +1,4 @@
-import Button from "./Button"
+import Button from "../../components/Button"
 
 const Contact = () => {
     return (
@@ -8,7 +8,7 @@ const Contact = () => {
                 <div className="relative z-[1]">
                 <h2 className=" lg:text-[3rem] md-text-[2.7rem] sm:text-[2.2rem] text-[1.3rem] text-gray-100">An enterprise template to ramp up your company website</h2>
                 <div className="flex md:flex-row flex-col gap-5 md:mt-10 mt-8 justify-center">
-                    <input type="text" placeholder="Your email address" className="rounded-md lg:w-[60%] sm:text-lg text-base py-[.7rem] sm:px-[1.5rem] px-[1rem] sm:py-[1rem] active:outline-none" />
+                    <input type="text" placeholder="Your email address" className="rounded-md lg:w-[60%] sm:text-lg text-base py-[.9rem] sm:px-[1.5rem] px-[1rem] sm:py-[1rem] active:outline-none" />
                     <Button type="submit" title="Start now" variant="btn_green" />
                 </div>
                 </div>

@@ -18,7 +18,7 @@ const Vision = () => {
     ]
 
     return (
-        <section className=" flex md:flex-row flex-col lg:gap-20 gap-14 pb-28 lg:px-20 md:px-10 px-7 justify-center items-center">
+        <section className=" flex md:flex-row flex-col lg:gap-20 gap-14 pb-28 mb:pt-10 pt-0 lg:px-20 md:px-10 px-7 justify-center items-center">
             <div className="xl:w-[35%] md:w-[42%] h-[28rem]">
                 <img src="/assets/about-img4.png" alt="" className="w-full h-full object-cover rounded-2xl" />
             </div>
