@@ -7,6 +7,7 @@ type Campaign = {
   current_funds: number;
   end_date: string;
   imageUrl: string;
+  isPublic: boolean;
 };
 
 export default Campaign;

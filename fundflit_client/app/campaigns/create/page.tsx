@@ -3,7 +3,7 @@
 import Alert from "@/components/Alert";
 import { useWeb5 } from "@/plugins/web5.client";
 import Campaign from "@/types/campaigns.type";
-import { createCampaign } from "@/utils/web5.utils";
+import { createCampaign, savePublicCampaign } from "@/utils/web5.utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -27,9 +27,14 @@ const CampaignCreate = () => {
   };
 
   const onSubmit = async (data: any) => {
-    const newData = { ...data, current_funds: 0 };
+    data.current_funds = 0;
+    console.log(data.public);
+
     try {
-      const recordID = await createCampaign(newData, web5, myDID);
+      const recordID = await createCampaign(data, web5, myDID);
+      if (data.public) {
+        savePublicCampaign(myDID, recordID);
+      }
       router.push(`/campaigns/detail/${myDID}/${await recordID}`);
     } catch (error) {
       // Handle error if createCampaign fails
@@ -46,7 +51,10 @@ const CampaignCreate = () => {
               <h1>Create your own campaign</h1>
             </article>
           </section>
-          <Link href={"/campaigns"} className="bg-green-50 hover:bg-black-100 btn self-start">
+          <Link
+            href={"/campaigns"}
+            className="bg-green-50 hover:bg-black-100 btn self-start"
+          >
             {"< Go back to campaigns"}
           </Link>
         </div>
@@ -62,6 +70,7 @@ const CampaignCreate = () => {
             <div>
               <label>Name*</label>
               <input
+                className="w-full"
                 type="text"
                 placeholder="John Doe"
                 {...register("name", {
@@ -82,6 +91,7 @@ const CampaignCreate = () => {
             <div>
               <label>Campaign name*</label>
               <input
+                className="w-full"
                 type="text"
                 placeholder="Write a tilte"
                 {...register("campaign_name", {
@@ -134,6 +144,7 @@ const CampaignCreate = () => {
                 )*
               </label>
               <input
+                className="w-full"
                 inputMode="numeric"
                 placeholder="0.50"
                 {...register("goal", {
@@ -150,6 +161,7 @@ const CampaignCreate = () => {
             <div>
               <label>End date*</label>
               <input
+                className="w-full"
                 type="date"
                 {...register("futureDate", {
                   required: "The end date field must be filled",
@@ -163,8 +175,9 @@ const CampaignCreate = () => {
 
             {/* Campaign image */}
             <div>
-              <label htmlFor="">Campaign image*</label>
+              <label>Campaign image*</label>
               <input
+                className="w-full"
                 type="url"
                 placeholder="Place image URL of your campaign"
                 {...register("imageUrl", {
@@ -178,6 +191,17 @@ const CampaignCreate = () => {
               />
             </div>
 
+            {/* Is the campaign public? */}
+
+            <div className="flex flex-col justify-start items-start gap-1">
+              <label>Is this campaign public?</label>
+              <input
+                className="scale-150 ml-1"
+                type="checkbox"
+                {...register("public")}
+              />
+            </div>
+
             {/* Submit */}
             <button className="bg-green-50 hover:bg-black-100" type="submit">
               Submit new campaign
@@ -186,7 +210,10 @@ const CampaignCreate = () => {
         </div>
 
         {Object.keys(errors).length > 0 && (
-          <Alert severity="error" message={String(Object.values(errors)[0]?.message)} />
+          <Alert
+            severity="error"
+            message={String(Object.values(errors)[0]?.message)}
+          />
         )}
       </section>
     </>
