@@ -10,12 +10,13 @@ import Alert from "@/components/Alert";
 import Link from "next/link";
 import { configureProtocol } from "@/utils/web5.utils";
 import Campaign from "@/types/campaigns.type";
+import Spinner from "@/components/Spinner";
 
 const Campaigns = () => {
   const { web5, myDID } = useWeb5();
   const [campaigns, setCampaigns] = useState<
-    { data: Campaign; recordID: string }[]
-  >([]);
+    { data: Campaign; recordID: string }[] | null
+  >(null);
   const {
     register,
     handleSubmit,
@@ -72,15 +73,15 @@ const Campaigns = () => {
   };
 
   const onSubmit = (data: any) => {
-    const filteredCampaigns = campaigns.filter((campaign) => {
+    const filteredCampaigns = campaigns?.filter((campaign) => {
       return campaign.data.campaign_name.includes(data.search);
     });
-    setCampaigns(filteredCampaigns);
+    setCampaigns(filteredCampaigns || []);
   };
 
   return (
     <>
-      <header className="px-10 py-5 bg-[#FBF8F6]">
+      <header className="px-10 py-5 bg-gray-10">
         <div className="flex justify-between flex-col gap-10">
           <section className="flex justify-between">
             <article className="w-full flex items-baseline text-4xl font-bold text-left">
@@ -131,32 +132,37 @@ const Campaigns = () => {
           </form>
         </div>
       </header>
-
-      <section className="h-full mt-4">
-        {campaigns === null ? (
-          <section className="text-3xl font-medium p-60 text-center">
-            Place a campaign name to start searching
+      {campaigns !== null ? (
+        <div>
+          <section className="h-full mt-4">
+            {campaigns === null ? (
+              <section className="text-3xl font-medium p-60 text-center">
+                Place a campaign name to start searching
+              </section>
+            ) : campaigns.length === 0 ? (
+              <section className="text-3xl font-medium p-60 text-center">
+                Couldn't find any campaign with that name
+              </section>
+            ) : (
+              <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
+                {campaigns.map((campaign) => (
+                  <div key={campaign.data.id}>
+                    {
+                      <CampaignCard
+                        campaign={campaign.data}
+                        did={myDID}
+                        record={campaign.recordID}
+                      />
+                    }
+                  </div>
+                ))}
+              </section>
+            )}
           </section>
-        ) : campaigns.length === 0 ? (
-          <section className="text-3xl font-medium p-60 text-center">
-            Couldn't find any campaign with that name
-          </section>
-        ) : (
-          <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
-            {campaigns.map((campaign) => (
-              <div key={campaign.data.id}>
-                {
-                  <CampaignCard
-                    campaign={campaign.data}
-                    did={myDID}
-                    record={campaign.recordID}
-                  />
-                }
-              </div>
-            ))}
-          </section>
-        )}
-      </section>
+        </div>
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 };

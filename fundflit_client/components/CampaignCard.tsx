@@ -8,7 +8,6 @@ export const CampaignCard = ({ campaign, did, record }: any) => {
   useEffect(() => {
     const prog = (campaign.current_funds / campaign.goal) * 100;
     setProgress(prog);
-    console.log(campaign)
   }, [campaign.goal, campaign.current_funds]);
 
   const openLinkInNewTab = (e: React.MouseEvent<HTMLAnchorElement>) => {

@@ -32,6 +32,10 @@ export const protocolDefinition = {
           who: "anyone",
           can: "write",
         },
+        {
+          who: "anyone",
+          can: "update",
+        },
       ],
     },
   },
@@ -57,7 +61,6 @@ export async function queryProtocol(web5: any) {
       },
     },
   });
-  console.log(protocols);
 }
 
 export const createCampaign = async (
@@ -65,9 +68,10 @@ export const createCampaign = async (
   web5: any,
   did: string | null
 ) => {
+  const updatedData = { ...campaign, id: uuid() };
   try {
     const { record: initialrecord } = await web5.dwn.records.create({
-      data: { ...campaign, id: uuid() },
+      data: updatedData,
       message: {
         schema: "blogpost",
         dataFormat: "application/json",
@@ -78,10 +82,8 @@ export const createCampaign = async (
     });
 
     const { status: initialstatus } = await initialrecord.send(did);
-    console.log(initialstatus);
 
-    const conId = initialrecord.id;
-    console.log(conId);
+    const conId = await initialrecord.id;
 
     return conId;
   } catch (e) {
@@ -98,9 +100,9 @@ export const readCampaigns = async (did: any, web5: any) => {
         protocol: "http://test3",
         protocolPath: "campaign",
       },
+      dateSort: "createdAscending",
     },
   });
-  console.log("camapign records", records);
 
   // Handle error
   if (status.code !== 200) {
@@ -111,7 +113,7 @@ export const readCampaigns = async (did: any, web5: any) => {
   // Handle empty records
   if (records.length === 0) {
     console.log("No matching campaigns found");
-    return [];
+    return null;
   }
 
   const campaignPromises = records.map(async (record: any) => {
@@ -130,7 +132,7 @@ export const readCampaigns = async (did: any, web5: any) => {
 export const readCampaignDetail = async (
   did: string,
   web5: any,
-  recordId: string
+  recordId: string | string[]
 ) => {
   try {
     const { records, status } = await web5.dwn.records.query({
@@ -197,3 +199,43 @@ export const readPublicCampaigns = async (web5: any) => {
     return [];
   }
 };
+
+export const calcDaysLeft = (date: string) => {
+  const targetDate = new Date(date);
+
+  // Get the current date
+  const currentDate = new Date();
+
+  // Calculate the difference in milliseconds between the target date and the current date
+  const differenceInMs = targetDate.getTime() - currentDate.getTime();
+
+  // Convert milliseconds to days
+  const daysLeft = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+  return daysLeft;
+};
+
+// export const updateCampaign = async (web5:any, did: string, recordID: string) => {
+//   try {
+//     const { records, status } = await web5.dwn.records.query({
+//       from: did,
+//       message: {
+//         filter: {
+//           recordId: recordID,
+//         },
+//       },
+//     });
+
+//     const campaignPromises = records.map(async (record: any) => {
+//       const data = await record.data.json();
+//       return data as {
+//         data: Campaign;
+//       };
+//     });
+
+//     const campaignArray = await Promise.all(campaignPromises);
+
+//     return campaignArray[0];
+//   } catch (e) {
+//     console.log("error fetching campaign detail: ", e);
+//   }
+// };
