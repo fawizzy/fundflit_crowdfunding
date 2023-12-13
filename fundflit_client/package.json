@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
+    "@tbd54566975/dwn-sdk-js": "^0.2.4",
     "@uiw/react-md-editor": "^4.0.1",
     "@web5/api": "^0.8.3",
     "bootstrap": "^5.3.2",
