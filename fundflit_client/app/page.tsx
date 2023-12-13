@@ -8,6 +8,8 @@ import { useWeb5 } from "@/plugins/web5.client";
 import { configureProtocol, queryProtocol} from "@/utils/web5.utils";
 
 import { useEffect } from "react";
+import { Dapp } from "@/components/Dapp";
+import "bootstrap/dist/css/bootstrap.css";
 
 export default function Home() {
   const { web5, myDID } = useWeb5();
@@ -19,6 +21,7 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
       <Hero />
+      <Dapp />
       <Features />
       <FAQs_Section />
     </main>
