@@ -88,49 +88,64 @@ export const appImages = [
 export const faqItems = [
   {
     id: 1,
-    question: "What is your name?",
+    question:
+      "How does your platform ensure the security of my financial information",
     answer:
-      "My name is John Doe. My name is John Doe.My name is John Doe.My name is John Doe.My name is John Doe",
+      "We prioritize the security of your financial data through robust encryption mechanisms. All transactions are securely processed, and we adhere to industry standards to protect your sensitive information. Additionally, our platform undergoes regular security audits to identify and address potential vulnerabilities.",
   },
   {
     id: 2,
-    question: "Where are you from?",
-    answer: "I am from New York",
+    question: "Can I choose to remain anonymous while supporting a project?",
+    answer:
+      "Absolutely. We respect your privacy choices. You have the option to contribute to projects anonymously, ensuring that your support remains confidential if you prefer. We empower you to control the visibility of your identity based on your comfort level.",
   },
   {
     id: 3,
-    question: "What is your favorite color?",
-    answer: "My favorite color is blue",
+    question:
+      "What happens if a project I support does not deliver as promised?",
+    answer:
+      "We understand the importance of accountability. While we cannot guarantee the success of every project, we encourage project creators to be transparent about their progress. If issues arise, our platform provides channels for communication between creators and backers.",
   },
   {
     id: 4,
-    question: "How do you spend your weekends?",
-    answer: "I enjoy hiking and reading",
+    question:
+      "How can I control the visibility of my personal information on the platform?",
+    answer:
+      "You have complete control over the visibility of your personal information. Our platform allows you to customize your privacy settings, choosing what information you want to make public and what you prefer to keep private.",
+  },
+  {
+    id: 5,
+    question:
+      "What measures does your platform take to ensure project authenticity",
+    answer:
+      "We take project authenticity seriously. While we cannot guarantee the outcome of every project, we implement measures such as decentralized identity verification and moderation processes to ensure that projects meet our guidelines. We encourage our community to report any suspicious activity, and we investigate such reports to maintain the integrity of our platform.",
   },
 ];
 
 export const features = [
   {
-    imgURL: "/assets/truck-fast.svg",
-    label: "Free shipping",
-    subtext: "Enjoy seamless shopping with our complimentary shipping service.",
+    imgURL: "/assets/data.svg",
+    label: "Data Control",
+    subtext:
+      "We empower our users with granular control over their data. You're at liberty to choose what information you want to make public and what to keep private.",
+  },
+  {
+    imgURL: "/assets/decentralised.svg",
+    label: "Decentralized Funding",
+    subtext:
+      "We leverage the power of Web5 to enable decentralized funding, providing a transparent and secure platform for financial transactions.",
   },
   {
     imgURL: "/assets/shield-tick.svg",
-    label: "Secure Payment",
+    label: "Smart Contracts",
     subtext:
-      "Experience worry-free transactions with our secure payment options.",
-  },
-  {
-    imgURL: "/assets/shield-tick.svg",
-    label: "Secure Payment",
-    subtext:
-      "Experience worry-free transactions with our secure payment options.",
+      "Our smart contracts automates project funding, milestones, and distribution of funds, ensuring trust and accountability.",
   },
   {
     imgURL: "/assets/support.svg",
-    label: "Love to help you",
-    subtext: "Our dedicated team is here to assist you every step of the way.",
+    label: "Decentralized Identity",
+    subtext:
+      "Our decentralized identity verification serves to enhance trust between project creators and investors, ensuring the legitimacy of campaigns",
   },
 ];
 
@@ -138,17 +153,17 @@ export const features = [
 export const numbers = [
   {
     value: 120 + "m",
-    title: "Cool feature title"
+    title: "Cool feature title",
   },
   {
     value: 10 + ".000",
-    title: "Cool feature title"
+    title: "Cool feature title",
   },
   {
     value: 240,
-    title: "Cool feature title"
+    title: "Cool feature title",
   },
-]
+];
 
 // About page teams section
 export const members = [
@@ -156,78 +171,83 @@ export const members = [
     id: 1,
     imgUrl: "/assets/about-img1.jpeg",
     name: "Michael Scott",
-    position: "General Manager"
+    position: "General Manager",
   },
   {
     id: 2,
     imgUrl: "/assets/about-img2.jpeg",
     name: "Michael Scott",
-    position: "General Manager"
+    position: "General Manager",
   },
   {
     id: 3,
     imgUrl: "/assets/about-img3.png",
     name: "Michael Scott",
-    position: "General Manager"
+    position: "General Manager",
   },
   {
     id: 4,
     imgUrl: "/assets/about-img4.png",
     name: "Michael Scott",
-    position: "General Manager"
+    position: "General Manager",
   },
-]
+];
 
 // About page our values section
 export const values = [
   {
     imgUrl: "/assets/about-img4.png",
     value: "We are commited.",
-    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+    detail:
+      "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. ",
   },
   {
     imgUrl: "/assets/about-img2.jpeg",
     value: "We are responsible.",
-    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+    detail:
+      "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. ",
   },
   {
     imgUrl: "/assets/about-img3.png",
     value: "We aim for progress.",
-    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+    detail:
+      "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. ",
   },
-]
+];
 
 // About page our misson section
 export const missions = [
   {
     highlight: "commited.",
-    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. "
+    detail:
+      "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. ",
   },
   {
     highlight: "responsible.",
-    detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. "
+    detail:
+      "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. ",
   },
-]
-
+];
 
 // contact page form inputs
 export const inputItems = [
   {
-      id: "name",
-      label: "Your Name",
-      type: "text",
-      imgUrl: "/assets/Icon_name.svg",
-      placeholder: "Your Name",
+    id: "name",
+    label: "Your Name",
+    type: "text",
+    imgUrl: "/assets/Icon_name.svg",
+    placeholder: "Your Name",
   },
   {
-      id: "email",
-      label: "Mail",
-      type: "email",
-      imgUrl: "/assets/Icon-Mail.svg",
-      placeholder: "Your Email",
-      pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  }
-]
+    id: "email",
+    label: "Mail",
+    type: "email",
+    imgUrl: "/assets/Icon-Mail.svg",
+    placeholder: "Your Email",
+    pattern:
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  },
+];
 
 // contact page hotline
 import { BsFillTelephoneFill } from "react-icons/bs";
@@ -238,7 +258,7 @@ import { TfiTwitter } from "react-icons/tfi";
 import { PiInstagramLogo } from "react-icons/pi";
 
 export const contactItems = {
-  direct : [
+  direct: [
     {
       imgUrl: BsFillTelephoneFill,
       info: "+234 8679 273 690",
@@ -250,20 +270,20 @@ export const contactItems = {
     {
       imgUrl: TiLocation,
       info: "103 Street, Grove Ave, QLD",
-    }
+    },
   ],
   socilaMedia: [
     {
       imgUrl: RiFacebookLine,
-      link: "/"
+      link: "/",
     },
     {
       imgUrl: TfiTwitter,
-      link: "/"
+      link: "/",
     },
     {
       imgUrl: PiInstagramLogo,
-      link: "/"
-    }
-  ]
-}
+      link: "/",
+    },
+  ],
+};
