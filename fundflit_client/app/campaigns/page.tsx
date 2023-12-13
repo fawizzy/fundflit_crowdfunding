@@ -20,7 +20,7 @@ const Campaigns = () => {
   } = useForm({ mode: "onSubmit" });
   const [submittedDID, setSubmittedDID] = useState("");
 
-  const { web5 } = useWeb5();
+  // const { web5 } = useWeb5();
 
   useEffect(() => {
     if (web5) configureProtocol(web5);

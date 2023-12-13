@@ -16,9 +16,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <Web5Provider>
       <html lang="en">
-        <body >
+        <body>
           <Navbar />
-          <main className="grid grid-rows-[auto_1fr_auto] min-h-screen">{children}</main>
+          <main className="grid grid-rows-[auto_1fr_auto] min-h-screen">
+            {children}
+          </main>
           <Footer />
         </body>
       </html>

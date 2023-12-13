@@ -54,7 +54,10 @@ const CampaignCreate = () => {
               <h1>Create your own campaign</h1>
             </article>
           </section>
-          <Link href={"/campaigns"} className="bg-green-50 hover:bg-black-100 btn self-start">
+          <Link
+            href={"/campaigns"}
+            className="bg-green-50 hover:bg-black-100 btn self-start"
+          >
             {"< Go back to campaigns"}
           </Link>
         </div>
