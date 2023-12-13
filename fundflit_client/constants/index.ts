@@ -208,3 +208,62 @@ export const missions = [
     detail: "Conversion angel investor entrepreneur first mover advantage. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. Handshake infographic mass market crowdfunding iteration. "
   },
 ]
+
+
+// contact page form inputs
+export const inputItems = [
+  {
+      id: "name",
+      label: "Your Name",
+      type: "text",
+      imgUrl: "/assets/Icon_name.svg",
+      placeholder: "Your Name",
+  },
+  {
+      id: "email",
+      label: "Mail",
+      type: "email",
+      imgUrl: "/assets/Icon-Mail.svg",
+      placeholder: "Your Email",
+      pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  }
+]
+
+// contact page hotline
+import { BsFillTelephoneFill } from "react-icons/bs";
+import { TiLocation } from "react-icons/ti";
+import { TbMailFilled } from "react-icons/tb";
+import { RiFacebookLine } from "react-icons/ri";
+import { TfiTwitter } from "react-icons/tfi";
+import { PiInstagramLogo } from "react-icons/pi";
+
+export const contactItems = {
+  direct : [
+    {
+      imgUrl: BsFillTelephoneFill,
+      info: "+234 8679 273 690",
+    },
+    {
+      imgUrl: TbMailFilled,
+      info: "support@fundflit.co",
+    },
+    {
+      imgUrl: TiLocation,
+      info: "103 Street, Grove Ave, QLD",
+    }
+  ],
+  socilaMedia: [
+    {
+      imgUrl: RiFacebookLine,
+      link: "/"
+    },
+    {
+      imgUrl: TfiTwitter,
+      link: "/"
+    },
+    {
+      imgUrl: PiInstagramLogo,
+      link: "/"
+    }
+  ]
+}
