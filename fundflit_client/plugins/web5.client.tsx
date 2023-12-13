@@ -7,7 +7,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Web5 } from "@web5/api/browser";
 
 
 interface Web5ContextProps {
@@ -30,6 +29,7 @@ export const Web5Provider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     const connectWeb5 = async () => {
+      const { Web5 } = await import("@web5/api");
       try {
         const { web5: connectedWeb5, did: connectedDID } = await Web5.connect({
           sync: "5s",
