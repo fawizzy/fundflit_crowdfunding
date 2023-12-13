@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 type FeaturesCardsProps = {
-  imgURL: "Image";
+  imgURL: string;
   label: string;
   subtext: string;
 };

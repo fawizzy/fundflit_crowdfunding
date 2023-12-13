@@ -51,14 +51,14 @@ const LogIn = () => {
               </article>
 
               <button
-                className="z-10 rounded-md bg-black-100 p-2 hover:scale-95 transition-transform"
+                className="z-10 rounded-md p-2 hover:scale-95 transition-transform"
                 onClick={() => {
                   setCopiedDID(false);
 
                   setIsLoginOpen(false);
                 }}
               >
-                <Image src={close} alt="close" />
+                <Image src={close} alt="close" width={24} height={24} />
               </button>
             </div>
 

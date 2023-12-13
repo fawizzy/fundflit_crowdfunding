@@ -11,7 +11,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <nav className="flexBetween max-container padding-container relative z-30 pt-10">
+    <nav className="flexBetween max-container padding-container relative z-30 pt-10 pb-5">
       <Link href="/">
         <Image
           src="/assets/Fundflit.png"

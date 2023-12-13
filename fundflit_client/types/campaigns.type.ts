@@ -5,8 +5,10 @@ type Campaign = {
   story: string;
   goal: number;
   current_funds: number;
-  end_date: string;
-  campaign_image: string;
+  futureDate: string;
+  imageUrl: string;
+  isPublic: boolean;
+  shortURL: string;
 };
 
 export default Campaign;

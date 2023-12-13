@@ -7,7 +7,8 @@ import { IoIosArrowDropdown } from "react-icons/io";
 const FAQs = () => {
   const [visibleAnswer, setVisibleAnswer] = useState(null);
 
-  const toggleAnswer = (id) => {
+  //Put id type to any to avoid ts error
+  const toggleAnswer = (id:any) => {
     setVisibleAnswer((prev) => {
       // If clicking on the same question, close it
       if (prev === id) {
