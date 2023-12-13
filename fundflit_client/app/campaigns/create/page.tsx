@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import MDEditor from "@uiw/react-md-editor";
+import MDEditor, { MDEditorProps } from "@uiw/react-md-editor";
 
 const CampaignCreate = () => {
   const { web5, myDID } = useWeb5();
@@ -23,6 +23,7 @@ const CampaignCreate = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onSubmit" });
+
 
   const isFutureDate = (selectedDate: Date) => {
     const currentDate = new Date();
@@ -48,48 +49,49 @@ const CampaignCreate = () => {
     }
   };
 
+  //   const createCampExamples = async () => {
+  //     const camps = [
+  //       {
+  //         campaign_name:
+  //           "CleanSeas: A Call to Clean Our Oceans with Autonomous Drones",
+  //         current_funds: 476000.78,
+  //         futureDate: "2044-12-01",
+  //         goal: 500000,
+  //         id: "52224176-c045-4007-b325-1aea0a7051d3",
+  //         imageUrl: "https://i.imgur.com/4CMqXjn.jpeg",
+  //         name: "Franco Aguirre",
+  //         public: true,
+  //         story: `🌊 At CleanSeas, we're deeply committed to tackling the grave issue of ocean pollution head-on. Our solution? Deploying cutting-edge autonomous drones equipped with state-of-the-art cleaning technology to rid our seas of harmful marine debris.
 
-//   const createCampExamples = async () => {
-//     const camps = [
-//       {
-//         campaign_name:
-//           "CleanSeas: A Call to Clean Our Oceans with Autonomous Drones",
-//         current_funds: 476000.78,
-//         futureDate: "2044-12-01",
-//         goal: 500000,
-//         id: "52224176-c045-4007-b325-1aea0a7051d3",
-//         imageUrl: "https://i.imgur.com/4CMqXjn.jpeg",
-//         name: "Franco Aguirre",
-//         public: true,
-//         story: `🌊 At CleanSeas, we're deeply committed to tackling the grave issue of ocean pollution head-on. Our solution? Deploying cutting-edge autonomous drones equipped with state-of-the-art cleaning technology to rid our seas of harmful marine debris.
+  // ## Why CleanSeas?
 
-// ## Why CleanSeas?
-        
-// 🤖 **Autonomous Technology:** Our drones are designed to autonomously navigate and collect marine debris, ensuring efficient and widespread cleaning of our oceans.
-        
-// 🌏 **Environmental Impact:** By removing harmful waste from our seas, we're safeguarding marine life and preserving delicate ecosystems for future generations.
-        
-// 🌟 **Global Initiative:** CleanSeas is more than a project; it's a collective effort to restore the health of our oceans and make a lasting positive impact on our planet.
-        
-// ## The Impact
-        
-// Picture a world where our oceans gleam with purity, where marine life thrives in a pollution-free habitat. CleanSeas strives to make this vision a reality by systematically eradicating the debris that plagues our waters, creating healthier ecosystems for countless species.
-        
-// ## Funding Goal
-        
-// To launch this crucial initiative, we aim to raise 500.000 ETH. This funding will facilitate the development of more efficient drone models, the expansion of our cleaning operations to key oceanic regions, and the implementation of robust monitoring systems.
-        
-// Join us in our mission to clean and protect our oceans. Every contribution brings us closer to a future where marine life flourishes in pristine waters.
-        
-// Together, let's make our oceans cleaner and healthier for generations to come. Support CleanSeas today!`,
-//       }
-//     ];
+  // 🤖 **Autonomous Technology:** Our drones are designed to autonomously navigate and collect marine debris, ensuring efficient and widespread cleaning of our oceans.
+
+  // 🌏 **Environmental Impact:** By removing harmful waste from our seas, we're safeguarding marine life and preserving delicate ecosystems for future generations.
+
+  // 🌟 **Global Initiative:** CleanSeas is more than a project; it's a collective effort to restore the health of our oceans and make a lasting positive impact on our planet.
+
+  // ## The Impact
+
+  // Picture a world where our oceans gleam with purity, where marine life thrives in a pollution-free habitat. CleanSeas strives to make this vision a reality by systematically eradicating the debris that plagues our waters, creating healthier ecosystems for countless species.
+
+  // ## Funding Goal
+
+  // To launch this crucial initiative, we aim to raise 500.000 ETH. This funding will facilitate the development of more efficient drone models, the expansion of our cleaning operations to key oceanic regions, and the implementation of robust monitoring systems.
+
+  // Join us in our mission to clean and protect our oceans. Every contribution brings us closer to a future where marine life flourishes in pristine waters.
+
+  // Together, let's make our oceans cleaner and healthier for generations to come. Support CleanSeas today!`,
+  //       }
+  //     ];
 
   //   camps.forEach(async (campaign) => {
   //     const recordID = await createCampaign(campaign, web5, myDID);
   //     savePublicCampaign(myDID, recordID);
   //   });
   // };
+
+  useEffect(()=> {console.log(story)},[story])
 
   return (
     <>
@@ -164,9 +166,7 @@ const CampaignCreate = () => {
               <MDEditor
                 textareaProps={{ placeholder: "Write your story" }}
                 value={story}
-                onChange={(val) => {
-                  setStory(val);
-                }}
+                onChange={setStory as MDEditorProps['onChange']}
               />
             </div>
 

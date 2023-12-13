@@ -6,7 +6,6 @@ import { useWeb5 } from "@/plugins/web5.client";
 import Spinner from "@/components/Spinner";
 import GoalBar from "@/components/GoalBar";
 import Campaign from "@/types/campaigns.type";
-import Markdown from "react-markdown";
 import MDEditor from "@uiw/react-md-editor";
 
 const CampaignDetails = () => {
