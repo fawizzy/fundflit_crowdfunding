@@ -112,3 +112,12 @@ textarea {
 .btn {
   @apply flex justify-center items-center text-white  py-3 px-4 font-semibold text-base rounded-md transition-all;
 }
+
+/* MD editor styles */
+
+.w-md-editor-text-input,
+.w-md-editor-text-pre > code,
+.w-md-editor-text-pre {
+  font-family: "Poppins" !important;
+  --md-editor-font-family: "Poppins" !important;
+}

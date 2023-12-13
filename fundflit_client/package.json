@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
+    "@uiw/react-md-editor": "^4.0.1",
     "@web5/api": "^0.8.3",
     "crypto-browserify": "^3.12.0",
     "next": "14.0.3",

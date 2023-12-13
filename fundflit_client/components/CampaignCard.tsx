@@ -35,14 +35,14 @@ export const CampaignCard = ({ campaign, did, record }: any) => {
       />
 
       <section className="flex flex-col gap-2 p-3">
-        <article className="line-clamp-1 whitespace-nowrap font-semibold">
+        <article className="line-clamp-3 font-semibold">
           {campaign.campaign_name}
         </article>
         <h3>by {campaign.name}</h3>
         <div>
           <GoalBar progress={progress} />
-          <h3>{`${campaign.current_funds} ETH pledged`}</h3>
-          <h3>{`${progress}% funded`}</h3>
+          <h3>{`${campaign.current_funds.toFixed(2)} ETH pledged`}</h3>
+          <h3>{`${progress>100 ? 100 : progress.toFixed(2)}% funded`}</h3>
         </div>
       </section>
     </a>

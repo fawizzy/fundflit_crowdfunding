@@ -4,7 +4,6 @@ import { useWeb5 } from "@/plugins/web5.client";
 import { readCampaigns, readPublicCampaigns } from "@/utils/web5.utils";
 import { CampaignCard } from "@/components/CampaignCard";
 import { useEffect, useState } from "react";
-// import Spinner from "@/components/Spinner";
 import { useForm } from "react-hook-form";
 import Alert from "@/components/Alert";
 import Link from "next/link";
@@ -36,7 +35,7 @@ const Campaigns = () => {
       if (web5Mounted) {
         try {
           const publicCampaigns = await readPublicCampaigns(web5);
-          console.log(publicCampaigns);
+          // console.log(publicCampaigns);
           setCampaigns(publicCampaigns);
         } catch (error) {
           // Handle errors if needed
