@@ -1,4 +1,6 @@
+import Image from "next/image";
 import GoalBar from "./GoalBar";
+import lock from "@/public/assets/lock.svg";
 import { useEffect, useState } from "react";
 
 export const CampaignCard = ({ campaign, did, record }: any) => {
@@ -6,6 +8,7 @@ export const CampaignCard = ({ campaign, did, record }: any) => {
   useEffect(() => {
     const prog = (campaign.current_funds / campaign.goal) * 100;
     setProgress(prog);
+    console.log(campaign)
   }, [campaign.goal, campaign.current_funds]);
 
   const openLinkInNewTab = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -16,18 +19,24 @@ export const CampaignCard = ({ campaign, did, record }: any) => {
   return (
     <a
       href={`/campaigns/detail/${did}/${record}`}
-      className="flex flex-col gap-2 bg-white rounded-md border-2 hover:scale-95 transition-transform"
+      className="flex flex-col gap-2 rounded-md border-2 bg-white transition-transform hover:scale-95"
       target="_blank"
       rel="noopener noreferrer"
       onClick={openLinkInNewTab}
     >
+      {!campaign.public && (
+        <div className="absolute m-2 rounded-lg bg-black-100 p-2">
+          <Image src={lock} width={24} height={24} alt="private campaign" />
+        </div>
+      )}
+
       <div
-        className="h-[200px] w-auto bg-cover bg-center rounded-t-md"
+        className="h-[200px] w-auto rounded-t-md bg-cover bg-center"
         style={{ backgroundImage: `url(${campaign.imageUrl})` }}
       />
 
-      <section className="p-3 flex flex-col gap-2">
-        <article className="font-semibold whitespace-nowrap line-clamp-1">
+      <section className="flex flex-col gap-2 p-3">
+        <article className="line-clamp-1 whitespace-nowrap font-semibold">
           {campaign.campaign_name}
         </article>
         <h3>by {campaign.name}</h3>

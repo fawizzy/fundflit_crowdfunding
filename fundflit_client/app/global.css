@@ -102,7 +102,7 @@ body {
 .form input,
 select,
 textarea {
-  @apply border-[1px] border-slate-400 font-normal rounded-lg w-full px-2 py-3;
+  @apply border-[1px] border-slate-400 font-normal rounded-lg px-2 py-3;
 }
 
 .form button {

@@ -1,5 +1,12 @@
 import Campaign from "@/types/campaigns.type";
 import { uuid } from "short-uuid";
+import { createClient } from "@supabase/supabase-js";
+
+//TODO: change to env variable
+export const supabase = createClient(
+  "https://afhzvfdehexjwwarwddg.supabase.co/",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmaHp2ZmRlaGV4and3YXJ3ZGRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTIzMDc1NTIsImV4cCI6MjAwNzg4MzU1Mn0.i7KPf2UQqd3r164zxA0ElaflaCPPHVB4QL936TiUUik"
+);
 
 interface CampaignRecordType {
   data: Campaign;
@@ -127,7 +134,7 @@ export const readCampaignDetail = async (
 ) => {
   try {
     const { records, status } = await web5.dwn.records.query({
-      from: "",
+      from: did,
       message: {
         filter: {
           recordId: recordId,
@@ -147,5 +154,46 @@ export const readCampaignDetail = async (
     return campaignArray[0];
   } catch (e) {
     console.log("error fetching campaign detail: ", e);
+  }
+};
+
+export const savePublicCampaign = async (
+  did: string | null,
+  recordID: string
+) => {
+  try {
+    const { data, error } = await supabase
+      .from("did")
+      .insert([{ did: did, recordID: recordID }]);
+    if (error) {
+      throw error;
+    }
+    console.log("Did inserted:", data);
+  } catch (error) {
+    console.error("Error inserting did:", error);
+  }
+};
+
+export const readPublicCampaigns = async (web5: any) => {
+  try {
+    const { data } = await supabase.from("did").select("*");
+
+    if (!data || data.length === 0) {
+      return [];
+    }
+
+    const campaignArr = await Promise.all(
+      data.map(async (campaign) => {
+        return {
+          data: await readCampaignDetail(campaign.did, web5, campaign.recordID),
+          recordID: campaign.recordID,
+        };
+      })
+    );
+
+    return campaignArr as { data: Campaign; recordID: string }[];
+  } catch (error) {
+    console.error("Error fetching public campaigns:", error);
+    return [];
   }
 };

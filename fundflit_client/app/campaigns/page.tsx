@@ -1,7 +1,7 @@
 "use client";
 
 import { useWeb5 } from "@/plugins/web5.client";
-import { readCampaigns } from "@/utils/web5.utils";
+import { readCampaigns, readPublicCampaigns } from "@/utils/web5.utils";
 import { CampaignCard } from "@/components/CampaignCard";
 import { useEffect, useState } from "react";
 // import Spinner from "@/components/Spinner";
@@ -21,20 +21,39 @@ const Campaigns = () => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm({ mode: "onSubmit" });
-  const [submittedDID, setSubmittedDID] = useState<any>(myDID);
+  const [web5Mounted, setWeb5Mounted] = useState(false);
 
   useEffect(() => {
-    if (web5) configureProtocol(web5, myDID);
+    if (web5) {
+      configureProtocol(web5, myDID);
+      setWeb5Mounted(true);
+    }
   }, [web5]);
 
-  const fetchData = async (did: string) => {
+  useEffect(() => {
+    const fetchCampaigns = async () => {
+      if (web5Mounted) {
+        try {
+          const publicCampaigns = await readPublicCampaigns(web5);
+          console.log(publicCampaigns);
+          setCampaigns(publicCampaigns);
+        } catch (error) {
+          // Handle errors if needed
+          console.error("Error fetching campaigns:", error);
+        }
+      }
+    };
 
+    fetchCampaigns();
+  }, [web5Mounted]);
+
+  const fetchData = async (did: string) => {
     const useDID = did?.search || myDID;
     if (did && web5) {
       // console.log(useDID);
       try {
         const campaignArray = await readCampaigns(useDID, web5);
-        
+
         setCampaigns(campaignArray);
       } catch (error) {
         // Handle errors if any
@@ -44,9 +63,7 @@ const Campaigns = () => {
       try {
         const campaignArray = await readCampaigns(myDID, web5);
         setCampaigns(campaignArray);
-        setSubmittedDID(useDID);
         console.log(myDID);
-        console.log(submittedDID);
       } catch (error) {
         // Handle errors if any
         console.error(error);
@@ -55,10 +72,10 @@ const Campaigns = () => {
   };
 
   const onSubmit = (data: any) => {
-    setSubmittedDID(data.did);
-
-    console.log(submittedDID);
-    fetchData(data);
+    const filteredCampaigns = campaigns.filter((campaign) => {
+      return campaign.data.campaign_name.includes(data.search);
+    });
+    setCampaigns(filteredCampaigns);
   };
 
   return (
@@ -69,18 +86,26 @@ const Campaigns = () => {
             <article className="w-full flex items-baseline text-4xl font-bold text-left">
               <h1>Explore Campaigns</h1>
             </article>
-            <Link
-              href={"/campaigns/create"}
-              className="btn bg-green-50 hover:bg-black-100 whitespace-nowrap"
-            >
-              Create a campaign
-            </Link>
+            <div className="flex gap-2">
+              <Link
+                href={"/my-campaigns"}
+                className="btn bg-green-50 hover:bg-black-100 whitespace-nowrap"
+              >
+                My Campaigns
+              </Link>
+              <Link
+                href={"/campaigns/create"}
+                className="btn bg-green-50 hover:bg-black-100 whitespace-nowrap"
+              >
+                Create a campaign
+              </Link>
+            </div>
           </section>
 
           <form className="form" id="search" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
-              placeholder="Place a DID or leave it empty to search for your campaigns"
+              placeholder="Search campaigns by name"
               {...register("search", {
                 pattern: {
                   value: /^(?!\d+$).*/,
@@ -110,11 +135,11 @@ const Campaigns = () => {
       <section className="h-full mt-4">
         {campaigns === null ? (
           <section className="text-3xl font-medium p-60 text-center">
-            Place a DID to start searching
+            Place a campaign name to start searching
           </section>
         ) : campaigns.length === 0 ? (
           <section className="text-3xl font-medium p-60 text-center">
-            This DID doesn't have any related campaigns
+            Couldn't find any campaign with that name
           </section>
         ) : (
           <section className="flex flex-col md:grid lg:grid-cols-4 md:grid-cols-3 gap-6 max-container padding-container">
@@ -123,7 +148,7 @@ const Campaigns = () => {
                 {
                   <CampaignCard
                     campaign={campaign.data}
-                    did={submittedDID || myDID}
+                    did={myDID}
                     record={campaign.recordID}
                   />
                 }
