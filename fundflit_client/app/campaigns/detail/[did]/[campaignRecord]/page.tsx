@@ -6,6 +6,8 @@ import { useWeb5 } from "@/plugins/web5.client";
 import Spinner from "@/components/Spinner";
 import GoalBar from "@/components/GoalBar";
 import Campaign from "@/types/campaigns.type";
+import Markdown from "react-markdown";
+import MDEditor from "@uiw/react-md-editor";
 
 const CampaignDetails = () => {
   const { web5 } = useWeb5();
@@ -36,6 +38,7 @@ const CampaignDetails = () => {
       const prog = (campaign.current_funds / campaign.goal) * 100;
       setProgress(prog > 100 ? 100 : prog);
       setDaysLeft(calcDaysLeft(campaign.futureDate));
+      // console.log(campaign);
     }
   }, [campaign]);
 
@@ -76,7 +79,7 @@ const CampaignDetails = () => {
                 {/* Raised percentage */}
                 <div className="flex flex-col gap-1">
                   <h2 className="text-2xl font-semibold text-black-100">
-                    {progress}%
+                    {progress.toFixed(2)}%
                   </h2>
                   <p className="text-gray-500">founded</p>
                 </div>
@@ -99,9 +102,16 @@ const CampaignDetails = () => {
               <h2 className="font-semibold">{campaign?.name} </h2>
               <p className="text-gray-500">is organizing this fundraiser</p>
             </div>
-            <div className="flex flex-col gap-2 rounded-lg bg-white p-4">
-              <h2 className="text-xl font-semibold">Story</h2>
-              <p>{campaign?.story}</p>
+
+            {/* Story */}
+            <div
+              className="flex flex-col gap-2 rounded-lg bg-white p-4"
+              data-color-mode="light"
+            >
+              <MDEditor.Markdown
+                source={campaign?.story}
+                style={{ whiteSpace: "pre-wrap" }}
+              />
             </div>
           </section>
         </div>
