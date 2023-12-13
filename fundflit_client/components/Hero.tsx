@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Button from "./Button";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -10,18 +11,26 @@ const Hero = () => {
         </h1>
         <p className="text-[16px] px-4 lg:px-0 mt-6 py-5 text-gray-50 xl:max-w-[520px] text-center lg:text-left">
           Welcome to Fundflit — the future of startup funding. 🚀 Our
-          decentralized platform harnesses the power of web5 technologies,
-          creating a space where innovation meets opportunity. Join Us as We
+          decentralized platform harnesses the power of web5 technologies, to
+          create a space where innovation meets opportunity. Join Us as We
           Redefine Community-Driven Fund with Trust and Transparency.
         </p>
         <div className="flex w-full gap-3 sm:flex-row lg:justify-start justify-center pt-10">
-          <Button type="button" title="Get Started Here!" variant="btn_green" />
-          <Button
-            type="button"
-            title="How we work?"
-            icon="/assets/play.svg"
-            variant="btn_white_text"
-          />
+          <Link href="/campaigns">
+            <Button
+              type="button"
+              title="Get Started Here!"
+              variant="btn_green"
+            />
+          </Link>
+          <Link href="/fundflit">
+            <Button
+              type="button"
+              title="How we work?"
+              icon="/assets/play.svg"
+              variant="btn_white_text"
+            />
+          </Link>
         </div>
       </div>
       <div className="lg:w-2/5 lg:px-20 pt-[4.5rem] sm:flex-row m-auto hover:scale-100">
