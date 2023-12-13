@@ -13,6 +13,7 @@ const CampaignCreate = () => {
   const { web5, myDID } = useWeb5();
   const [campaign, setCampaign] = useState<Campaign>();
   const router = useRouter();
+ 
 
   const {
     register,
@@ -44,7 +45,7 @@ const CampaignCreate = () => {
 
   return (
     <>
-      <header className="px-10 py-5 bg-[#FBF8F6] flex flex-col">
+      <header className="px-10 py-5 bg-gray-10 flex flex-col">
         <div className="flex justify-between flex-col gap-10">
           <section className="flex justify-between">
             <article className="w-full flex items-baseline text-4xl font-bold text-left">
